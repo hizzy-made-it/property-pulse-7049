@@ -30,13 +30,13 @@ export default function AuthPage() {
   const google = async () => {
     setError(null);
     setPending("google");
-    const result = await authClient.managedAuth.signIn({ provider: "google" });
+    const result = await authClient.signIn.social({ provider: "google" });
     setPending(null);
-    if (result.error && result.error.code !== "POPUP_CLOSED") {
+    if (result.error) {
       setError(result.error.message ?? "Sign-in failed.");
       return;
     }
-    if (!result.error) await finish();
+    await finish();
   };
 
   const submit = async (e: React.FormEvent) => {

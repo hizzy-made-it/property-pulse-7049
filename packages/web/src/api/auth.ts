@@ -1,7 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { expo } from "@better-auth/expo";
-import { runableManagedAuth } from "@runablehq/managed-auth/server";
 import { db } from "./database";
 
 export const auth = betterAuth({
@@ -15,10 +14,6 @@ export const auth = betterAuth({
     return origin ? [origin] : ["*"];
   },
   plugins: [
-    ...runableManagedAuth({
-      applicationId: process.env.APPLICATION_ID!,
-      issuer: process.env.VITE_RUNABLE_AUTH_ISSUER!,
-    }),
     expo(),
   ],
 });

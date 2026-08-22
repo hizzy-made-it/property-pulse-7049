@@ -6,8 +6,9 @@ import { authClient } from "./auth";
 
 const link = new RPCLink({
   url: `${window.location.origin}/api/rpc`,
-  headers: () => {
-    const token = authClient.managedAuth.getToken();
+  headers: async () => {
+    const session = await authClient.getSession();
+    const token = session?.data?.session?.token;
     return token ? { Authorization: `Bearer ${token}` } : {};
   },
 });

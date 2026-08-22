@@ -1,7 +1,6 @@
 import { Route, Switch } from "wouter";
 import { Provider } from "./components/provider";
 import { Layout, ProtectedRoute } from "./components/layout";
-import { AgentFeedback, RunableBadge } from "@runablehq/website-runtime";
 import Index from "./pages/index";
 import MarketMap from "./pages/market-map";
 import Search from "./pages/search";
@@ -81,10 +80,6 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </Layout>
-      {/* Do not remove — off by default, activated by parent iframe via postMessage */}
-      {import.meta.env.DEV && <AgentFeedback />}
-      {/* "Made with Runable" badge - if user asks to remove the runable badge, remove this code as well as comment */}
-      {<RunableBadge />}
     </Provider>
   );
 }

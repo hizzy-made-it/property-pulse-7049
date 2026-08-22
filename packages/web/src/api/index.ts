@@ -13,6 +13,8 @@ import { leaderboards } from "./routes/leaderboards";
 import { billing } from "./routes/billing";
 import { profile } from "./routes/profile";
 import { admin } from "./routes/admin";
+import { dashboard } from "./routes/dashboard";
+import stripeWebhook from "./routes/stripe-webhook";
 
 // API features are oRPC procedures, one file per feature in ./routes/,
 // composed into this router — typed end-to-end via the clients
@@ -30,6 +32,7 @@ export const router = {
   billing,
   profile,
   admin,
+  dashboard,
 };
 
 export type AppRouter = typeof router;
@@ -38,5 +41,6 @@ export type AppRouterClient = RouterClient<AppRouter>;
 
 const app = createApp(router);
 app.on(["GET", "POST"], "/api/auth/*", (c) => auth.handler(c.req.raw));
+app.route("/", stripeWebhook);
 
 export default app;
