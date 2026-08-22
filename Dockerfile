@@ -11,6 +11,9 @@ RUN bun install
 # Build the web app
 RUN cd packages/web && bun run build
 
+# Create data directory for SQLite
+RUN mkdir -p /app/data
+
 EXPOSE 4200
 
 CMD ["bun", "run", "packages/web/src/__server.ts"]
